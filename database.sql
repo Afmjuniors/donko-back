@@ -5,7 +5,7 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     role TEXT NOT NULL,
-    interests TEXT DEFAULT("[]")
+    interests TEXT DEFAULT('[]'),
     created_at TEXT NOT NULL
 );
 CREATE TABLE empresas (
@@ -13,7 +13,7 @@ CREATE TABLE empresas (
     name TEXT NOT NULL,
     adress TEXT NOT NULL,
     link TEXT NOT NULL,
-    image TEXT NOT NULL,
+    image TEXT NOT NULL
 );
 CREATE TABLE events (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
