@@ -29,12 +29,12 @@ private userDTO : UserDTO
     }
     public editUsers = async (req:Request,res:Response) =>{
         try {
-            const input ={
-                email:req.body.email,
-                passowrd:req.body.passowrd,
-                interests:req.body.interests,
-                id:req.params.id
-            }
+            const input = this.userDTO.EditUserInputDTO(
+                req.headers.authorization,
+                req.params.id,
+                req.body.email,
+                req.body.passowrd
+            )
             const output = await this.userBusiness.editUser(input)
         res.status(200).send(output)
             
@@ -93,7 +93,10 @@ private userDTO : UserDTO
     }
     public deleteUsers = async (req:Request,res:Response) =>{
         try {
-            const input = req.params.id
+            const input = this.userDTO.DeleteUserInputDTO(
+                req.headers.authorization,
+                req.params.id
+            )
             const output = await this.userBusiness.deleteUser(input)
 
         res.status(200).send(output)

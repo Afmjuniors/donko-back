@@ -1,13 +1,15 @@
 import { nowDate } from "../constants/patterns"
 import { UserDatabase } from "../database/UsersDatabase"
 import { CreateUserDTOInput, CreateUserDTOOutput, LoginUserInputDTO, LoginUserOutputDTO } from "../dto/UserDTO"
+import { BadRequestError } from "../error/BadRequestError"
+import { DeniedAuthoError } from "../error/DeniedAuthoError"
 import { NotFoundError } from "../error/NotFoundError"
 import { PasswordIncorrectError } from "../error/PasswordIncorrectError"
 import { User } from "../models/User"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager, TokenPayload } from "../services/TokenManager"
-import { Interests, Roles, UserDB } from "../types"
+import { Interests, Roles } from "../types"
 
 export class UserBusiness {
     constructor(
@@ -17,25 +19,25 @@ export class UserBusiness {
         private tokenManager: TokenManager
     ) { }
 
-    public getUsers = async () => {
+    public getUsers = async () => {//End point so de tests
         return await this.userDatabase.getAllUsers()
     }
-    public loginUser= async ({email,password}:LoginUserInputDTO):Promise<LoginUserOutputDTO> =>{
+    public loginUser = async ({ email, password }: LoginUserInputDTO): Promise<LoginUserOutputDTO> => {
 
         const user = await this.userDatabase.getUserByEmail(email)
-        if(user===undefined){
+        if (user === undefined) {
             throw new NotFoundError("Usuario não encontrado")
         }
 
-        const isPassword =  await this.hashManager.compare(password,user.password)
-        
-        if(!isPassword){
+        const isPassword = await this.hashManager.compare(password, user.password)
+
+        if (!isPassword) {
             throw new PasswordIncorrectError("Email ou Password invalidos")
         }
-        const payload:TokenPayload={
-            id:user.id,
-            name:User.name,
-            role:user.role
+        const payload: TokenPayload = {
+            id: user.id,
+            name: User.name,
+            role: user.role
         }
 
         const token = this.tokenManager.createToken(payload)
@@ -75,7 +77,17 @@ export class UserBusiness {
     }
 
     public editUser = async (input: any) => {
-        const { email, password, interests, id } = input
+        const { token, email, password, interests, id } = input
+
+
+        const payload = this.tokenManager.getPyaload(token)
+        if(payload === null){
+            throw new BadRequestError("Token invalido")
+        }
+        if(payload.id!==id){
+            throw new DeniedAuthoError("Apenas proprio usuario pode se editar")
+        }
+
 
         await this.userDatabase.editUser({ email, password, interests }, id)
 
@@ -84,8 +96,17 @@ export class UserBusiness {
         }
     }
 
-    public deleteUser = async (id: string) => {
+    public deleteUser = async (input: any) => {
+        const { id, token } = input
 
+        const payload = this.tokenManager.getPyaload(token)
+        console.log(token)
+        if(payload === null){
+            throw new BadRequestError("Token invalido")
+        }
+        if(payload.id!==id){
+            throw new DeniedAuthoError("Apenas proprio usuario pode se deletar")
+        }
 
         await this.userDatabase.deleteUser(id)
 

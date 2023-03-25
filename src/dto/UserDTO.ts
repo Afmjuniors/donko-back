@@ -19,6 +19,23 @@ export interface LoginUserOutputDTO {
     message: string,
     token:string
 }
+export interface EditUserInputDTO{
+    token:string,
+    id:string,
+    email?:string,
+    password?:string
+
+}
+export interface EditUserOutputDTO {
+    message: string
+}
+export interface DeleteUserInputDTO{
+    id:string,
+    token:string
+}
+export interface DeleteUserOutputDTO {
+    message: string
+}
 
 
 export class UserDTO {
@@ -71,6 +88,54 @@ export class UserDTO {
         const dto ={
             email,
             password
+        }
+        return dto
+    }
+    public EditUserInputDTO = (
+        token:unknown,
+        id:unknown,
+        email:unknown,
+        password:unknown       
+        
+    ):EditUserInputDTO=>{
+        if(typeof token !=="string"){
+            throw new BadRequestError("'token' deve ser uma string")
+        }
+        if(typeof id !=="string"){
+            throw new BadRequestError("'id' deve ser uma string")
+        }
+        if(email!==undefined){
+            if(typeof email !=="string"){
+                throw new BadRequestError("'email' deve ser uma string")
+            }
+        }
+        if(password!==undefined){
+            if(typeof password !=="string"){
+                throw new BadRequestError("'password' deve ser uma string")
+            }
+        }
+        const dto={
+            token,
+            id,
+            email,
+            password
+        }
+        return dto
+
+    }
+    public DeleteUserInputDTO = (
+        token:unknown,
+        id:unknown
+    ):DeleteUserInputDTO=>{
+        if(typeof token !=="string"){
+            throw new BadRequestError("'token' deve ser uma string")
+        }
+        if(typeof id !=="string"){
+            throw new BadRequestError("'id' deve ser uma string")
+        }
+        const dto ={
+            token,
+            id
         }
         return dto
     }
