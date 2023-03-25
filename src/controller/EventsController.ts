@@ -14,7 +14,6 @@ export class EventsController {
 
             const output = await this.eventsBusiness.getEvents()
 
-
             res.status(200).send(output)
 
         } catch (error) {
