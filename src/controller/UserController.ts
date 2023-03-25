@@ -70,6 +70,27 @@ private userDTO : UserDTO
             }
         }
     }
+
+    public loginUser = async (req:Request,res:Response) =>{
+        try {
+            const input = this.userDTO.LoginUserInputDTO(
+                req.body.email,
+                req.body.password
+            )
+                const output = await this.userBusiness.loginUser(input)
+
+        res.status(201).send(output)
+            
+        } catch (error) {
+            console.log(error)
+        
+            if (error instanceof BaseError) {
+                res.status(error.statusCode).send(error.message)
+            } else {
+                res.status(500).send("Erro inesperado")
+            }
+        }
+    }
     public deleteUsers = async (req:Request,res:Response) =>{
         try {
             const input = req.params.id

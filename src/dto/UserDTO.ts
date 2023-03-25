@@ -11,6 +11,14 @@ export interface CreateUserDTOOutput {
     message: string,
     token:string
 }
+export interface LoginUserInputDTO {
+    email: string,
+    password: string,
+}
+export interface LoginUserOutputDTO {
+    message: string,
+    token:string
+}
 
 
 export class UserDTO {
@@ -48,4 +56,24 @@ export class UserDTO {
 
         return dto
     }
+
+    public LoginUserInputDTO = (
+        email:unknown,
+        password:unknown
+    ):LoginUserInputDTO =>{
+        if (typeof email !== "string") {
+            throw new BadRequestError("'email' deve ser uma string")
+        }
+
+        if (typeof password !== "string") {
+            throw new BadRequestError("'password' deve ser uma string")
+        }
+        const dto ={
+            email,
+            password
+        }
+        return dto
+    }
+
+
 }
