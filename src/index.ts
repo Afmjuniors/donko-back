@@ -21,3 +21,4 @@ app.listen(Number(process.env.PORT), () => {
 app.use("/users", userRouter)
 app.use("/events", eventsRouter)
 
+

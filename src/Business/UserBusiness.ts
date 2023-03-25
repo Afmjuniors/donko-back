@@ -22,6 +22,9 @@ export class UserBusiness {
     public getUsers = async () => {//End point so de tests
         return await this.userDatabase.getAllUsers()
     }
+    public getEmpresas = async () => {//End point so de tests
+        return await this.userDatabase.getAllEmpresas()
+    }
     public loginUser = async ({ email, password }: LoginUserInputDTO): Promise<LoginUserOutputDTO> => {
 
         const user = await this.userDatabase.getUserByEmail(email)

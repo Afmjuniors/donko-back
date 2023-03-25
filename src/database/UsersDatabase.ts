@@ -11,6 +11,11 @@ export class UserDatabase extends BaseDatabase {
             .connection(UserDatabase.TABLE_USER)
         return result
     }
+    public getAllEmpresas = async (): Promise<UserDB[]> => {
+        const result = await BaseDatabase
+            .connection("empresas")
+        return result
+    }
 
     public getUserByEmail = async (email:string):Promise<UserDB | undefined> =>{
         const [user] = await BaseDatabase
