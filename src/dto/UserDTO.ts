@@ -1,15 +1,17 @@
 import { BadRequestError } from "../error/BadRequestError"
+import { Interests } from "../types"
 
 export interface CreateUserDTOInput {
     name: string,
     email: string,
     password: string,
-    interests: String[]
+    interests: { }
 }
 export interface CreateUserDTOOutput {
     message: string,
     token:string
 }
+
 
 export class UserDTO {
     public CreateUserDTOInput = (
@@ -30,12 +32,11 @@ export class UserDTO {
         if (typeof password !== "string") {
             throw new BadRequestError("'password' deve ser uma string")
         }
-        if (!Array.isArray(interests)) {
-            throw new BadRequestError("'interests deve ser um array'")
-        }
-        if (!interests.every(ell => typeof ell === "string")) {
-            throw new BadRequestError("Os elementos dentro do Array 'interersts' deve ser somente strings")
-        }
+        if (!(interests && typeof interests === "object" && "types" in interests && "categories" in interests &&
+        Array.isArray(interests.types) && Array.isArray(interests.categories))) {
+        throw new BadRequestError("'interests' deve ser um objeto com os campos 'types' e 'category', ambos sendo arrays de strings")
+    }
+
 
         const dto = {
             name,
