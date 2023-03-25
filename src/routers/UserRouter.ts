@@ -24,6 +24,7 @@ const userControler = new UserControler(
 
 
 userRouter.get('/', userControler.getUsers )
+userRouter.get('/empresas', userControler.getEmpresas )
 userRouter.put('/:id', userControler.editUsers )
 userRouter.post('/signup', userControler.createUsers )
 userRouter.post('/login', userControler.loginUser )
