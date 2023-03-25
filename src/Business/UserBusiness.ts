@@ -1,6 +1,8 @@
 import { nowDate } from "../constants/patterns"
 import { UserDatabase } from "../database/UsersDatabase"
-import { CreateUserDTOInput, CreateUserDTOOutput } from "../dto/UserDTO"
+import { CreateUserDTOInput, CreateUserDTOOutput, LoginUserInputDTO, LoginUserOutputDTO } from "../dto/UserDTO"
+import { NotFoundError } from "../error/NotFoundError"
+import { PasswordIncorrectError } from "../error/PasswordIncorrectError"
 import { User } from "../models/User"
 import { HashManager } from "../services/HashManager"
 import { IdGenerator } from "../services/IdGenerator"
@@ -17,6 +19,31 @@ export class UserBusiness {
 
     public getUsers = async () => {
         return await this.userDatabase.getAllUsers()
+    }
+    public loginUser= async ({email,password}:LoginUserInputDTO):Promise<LoginUserOutputDTO> =>{
+
+        const user = await this.userDatabase.getUserByEmail(email)
+        if(user===undefined){
+            throw new NotFoundError("Usuario não encontrado")
+        }
+
+        const isPassword =  await this.hashManager.compare(password,user.password)
+        
+        if(!isPassword){
+            throw new PasswordIncorrectError("Email ou Password invalidos")
+        }
+        const payload:TokenPayload={
+            id:user.id,
+            name:User.name,
+            role:user.role
+        }
+
+        const token = this.tokenManager.createToken(payload)
+        return {
+            message: "Login feito com sucesso",
+            token
+        }
+
     }
     public createNewUser = async (input: CreateUserDTOInput): Promise<CreateUserDTOOutput> => {
 
