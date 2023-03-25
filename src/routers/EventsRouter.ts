@@ -5,7 +5,7 @@ import { EventsDatabase } from "../database/EventsDatabase"
 
 import { TokenManager } from "../services/TokenManager"
 
-export const userRouter = express.Router()
+export const eventsRouter = express.Router()
 
 // const postsDTO = new PostsDTO()
 
@@ -18,7 +18,7 @@ const eventsController = new EventsController(
 
 
 
-userRouter.get('/', eventsController.getUsers )
+eventsRouter.get('/', eventsController.getEvents )
 
 
 

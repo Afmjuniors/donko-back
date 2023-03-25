@@ -7,7 +7,7 @@ export class EventsController{
 private eventsBusiness: EventsBusiness,
     ){}
 
-    public getUsers = async (req:Request,res:Response) =>{
+    public getEvents = async (req:Request,res:Response) =>{
         try {
 
             const output = await this.eventsBusiness.getEvents()
