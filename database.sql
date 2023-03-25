@@ -26,12 +26,14 @@ CREATE TABLE events (
     adress TEXT NOT NULL,
     type TEXT NOT NULL,
     category TEXT NOT NULL,
+    start_at TEXT NOT NULL,
     buy_at TEXT NOT NULL,
     created_at TEXT NOT NULL,
 
     FOREIGN KEY (empresa_id) REFERENCES empresas(id)
 );
 
+-- DROP TABLE events;
 
 
 
@@ -57,7 +59,7 @@ VALUES
 
 INSERT INTO events
 VALUES
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5d","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",19.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Rock","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5c","6dab31e0-bd9d-4dc3-bc00-e94bed677a5c",1,"Evento 1",29.90,'{"rua":"seila oq","numero":100,"bairro":"Barra da Tijuca","cep":20102102}',"Teatro","Comedia","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5b",1,"Evento 1",9.90,'{"rua":"seila oq","numero":100,"bairro":"Porto","cep":20102102}',"Esposição","Moderna","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5a","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",49.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Pagode","2023-03-26T10:52:35.627Z","2023-03-25T10:52:35.627Z");
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5d","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",19.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Rock","2023-03-26T10:52:35.627Z","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5c","6dab31e0-bd9d-4dc3-bc00-e94bed677a5c",1,"Evento 1",29.90,'{"rua":"seila oq","numero":100,"bairro":"Barra da Tijuca","cep":20102102}',"Teatro","Comedia","2023-03-26T10:52:35.627Z","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5b",1,"Evento 1",9.90,'{"rua":"seila oq","numero":100,"bairro":"Porto","cep":20102102}',"Esposição","Moderna","2023-03-26T10:52:35.627Z","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5a","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",49.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Pagode","2023-03-26T10:52:35.627Z","2023-03-26T10:52:35.627Z","2023-03-25T10:52:35.627Z");
