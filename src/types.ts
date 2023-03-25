@@ -12,3 +12,7 @@ export interface UserDB{
     interests:string,
     created_at:string
 }
+export interface Interests{
+    types:String[],
+    categories:String[]
+}

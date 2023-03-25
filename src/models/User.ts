@@ -1,5 +1,5 @@
 import { nowDate } from "../constants/patterns";
-import { Roles, UserDB } from "../types";
+import { Interests, Roles, UserDB } from "../types";
 
 
 
@@ -11,7 +11,7 @@ export class User {
         private email:string,
         private password:string,
         private role:Roles,
-        private interests:String[],
+        private interests:Interests,
         private createdAt:string,
     ){} 
 
@@ -29,10 +29,17 @@ export class User {
     public getRole():Roles{return this.role}
     public setRole(role:Roles):void{this.role=role}
     
-    public getInterests():String[]{return this.interests}
-    public setInterests(interests:String[]):void{
-        for(let interest of interests){
-            this.interests.push(interest)
+    public getInterests():Interests{return this.interests}
+    public setInterests({types,categories}:Interests):void{
+        for(let type of types){
+            if(!this.interests.types.includes(type)){
+                this.interests.types.push(type)
+            }
+        }
+        for(let category of categories){
+            if(!this.interests.categories.includes(category)){
+                this.interests.categories.push(category)
+            }
         }
     }  
     
