@@ -1,13 +1,13 @@
 import { nowDate } from "../constants/patterns"
 import { EventsDatabase } from "../database/EventsDatabase"
-import { CreateEventInputDTO, CreateEventOutputDTO, EditEventInputDTO, EditEventOutputDTO } from "../dto/EventDTO"
+import { CreateEventInputDTO, CreateEventOutputDTO, EditEventInputDTO, EditEventOutputDTO, GetAllEventOutputDTO } from "../dto/EventDTO"
 import { BadRequestError } from "../error/BadRequestError"
 import { DeniedAuthoError } from "../error/DeniedAuthoError"
 import { NotFoundError } from "../error/NotFoundError"
 import { Event } from "../models/Event"
 import { IdGenerator } from "../services/IdGenerator"
 import { TokenManager } from "../services/TokenManager"
-import { EditEventDB, Roles } from "../types"
+import { Adress, EditEventDB, Roles } from "../types"
 
 export class EventsBusiness {
     constructor(
@@ -16,8 +16,32 @@ export class EventsBusiness {
         private tokenManager: TokenManager
     ) { }
 
-    public getEvents = async () => {
-        return await this.eventsDatabase.getAllEvents()
+    public getEvents = async () :Promise<GetAllEventOutputDTO> => {
+
+        const events = await this.eventsDatabase.getAllEvents()
+        const result = events.map((event)=>{
+            return new Event(
+                event.id,
+                event.creator_id,
+                event.empresa_id,
+                event.isAvalible?true:false,
+                event.name,
+                event.price,
+                JSON.parse(event.adress),
+                event.type,
+                event.category,
+                JSON.parse(event.links_sales),
+                event.image,
+                event.start_at,
+                event.created_at
+            ).toBusiness()
+        })
+
+        const output = {
+            message:"Resultado de todos os eventos",
+            events: result
+        }
+        return output
     }
     public createEvent =async (input:CreateEventInputDTO):Promise<CreateEventOutputDTO> => {
         const{token} = input
@@ -37,7 +61,7 @@ export class EventsBusiness {
             input.isAvalible,
             input.name,
             input.price,
-            input.adress,
+            input.adress as Adress,
             input.type,
             input.category,
             input.linksSales,

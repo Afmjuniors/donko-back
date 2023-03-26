@@ -1,45 +1,76 @@
 import { BadRequestError } from "../error/BadRequestError"
-import { Interests } from "../types"
+import { Adress, EventFront, Interests } from "../types"
+
+
+export interface GetAllEventOutputDTO {
+    message:string,
+    events:EventFront[]
+}
 
 export interface CreateEventInputDTO {
-    token:string,
+    token: string,
     empresaId: string,
     isAvalible: boolean,
     name: string,
     price: number,
-    adress: {},
+    adress: Adress,
     type: string,
     category: string,
-    linksSales:string[],
-    image:string,
+    linksSales: string[],
+    image: string,
     startAt: string
 }
 export interface CreateEventOutputDTO {
     message: string
 }
 export interface EditEventInputDTO {
-    token:string,
+    token: string,
     id: string
     isAvalible?: boolean,
-    price?:number,
+    price?: number,
     startAt?: string
 }
 export interface EditEventOutputDTO {
     message: string
 }
-export interface DeleteEventInputDTO{
-    token:string,
-    id:string
+export interface DeleteEventInputDTO {
+    token: string,
+    id: string
 }
-export interface DeleteEventOutputDTO{
-    message:string
+export interface DeleteEventOutputDTO {
+    message: string
 }
 
 
 
 export class EventDTO {
+    private validateAddress = (address: unknown): Adress => {
+        if (typeof address !== "object" || address === null) {
+          throw new BadRequestError("'address' deve ser um objeto");
+        }
+      
+        const { rua, numero, bairro, cep } = address as Adress;
+      
+        if (typeof rua !== "string") {
+          throw new BadRequestError("'rua' deve ser uma string");
+        }
+      
+        if (typeof numero !== "number") {
+          throw new BadRequestError("'numero' deve ser um número");
+        }
+      
+        if (typeof bairro !== "string") {
+          throw new BadRequestError("'bairro' deve ser uma string");
+        }
+      
+        if (typeof cep !== "number") {
+          throw new BadRequestError("'cep' deve ser um número");
+        }
+      
+        return { rua, numero, bairro, cep };
+      }; 
     public CreateEventInputDTO = (
-        token:unknown,
+        token: unknown,
         empresaId: unknown,
         isAvalible: unknown,
         name: unknown,
@@ -47,8 +78,8 @@ export class EventDTO {
         adress: unknown,
         type: unknown,
         category: unknown,
-        linksSales:unknown,
-        image:unknown,
+        linksSales: unknown,
+        image: unknown,
         startAt: unknown
     ): CreateEventInputDTO => {
 
@@ -83,19 +114,17 @@ export class EventDTO {
         if (typeof image !== "string") {
             throw new BadRequestError("'image' deve ser uma string")
         }
-        if (typeof adress !== "object" || adress === null) {
-            throw new BadRequestError("'adress' deve ser uma object")
-        }
+        const address = this.validateAddress(adress)
 
 
 
-        const dto : CreateEventInputDTO= {
+        const dto: CreateEventInputDTO = {
             token,
             empresaId,
             isAvalible,
             name,
             price,
-            adress,
+            adress:address,
             type,
             category,
             linksSales,
@@ -108,10 +137,10 @@ export class EventDTO {
     }
 
     public EditEventInputDTO = (
-        token:unknown,
+        token: unknown,
         id: unknown,
         isAvalible: unknown,
-        price:unknown,
+        price: unknown,
         startAt: unknown
     ): EditEventInputDTO => {
         if (typeof token !== "string") {
@@ -146,21 +175,22 @@ export class EventDTO {
         return dto
     }
     public DeleteEventInputDTO = (
-        token:unknown,
-        id:unknown
-    ):DeleteEventInputDTO=>{
-        if(typeof token !=="string"){
+        token: unknown,
+        id: unknown
+    ): DeleteEventInputDTO => {
+        if (typeof token !== "string") {
             throw new BadRequestError("'token' deve ser uma string")
         }
-        if(typeof id !=="string"){
+        if (typeof id !== "string") {
             throw new BadRequestError("'id' deve ser uma string")
         }
-        const dto ={
+        const dto = {
             token,
             id
         }
         return dto
     }
+
 
 
 
