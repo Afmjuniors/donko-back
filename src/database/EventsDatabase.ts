@@ -1,5 +1,5 @@
 import { User } from "../models/User"
-import { EditEventDB, EventDB, UserDB } from "../types"
+import { EditEventDB, EmpresasDB, EventDB, UserDB } from "../types"
 import { BaseDatabase } from "./BaseDatabase"
 
 export class EventsDatabase extends BaseDatabase {
@@ -9,6 +9,11 @@ export class EventsDatabase extends BaseDatabase {
     public getAllEvents = async (): Promise<EventDB[]> => {
         const result = await BaseDatabase
             .connection(EventsDatabase.TABLE_USER)
+        return result
+    }
+    public getEmpresas = async (): Promise<EmpresasDB[]> => {
+        const result = await BaseDatabase
+            .connection("empresas")
         return result
     }
 

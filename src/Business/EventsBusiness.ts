@@ -18,8 +18,15 @@ export class EventsBusiness {
 
     public getEvents = async () :Promise<GetAllEventOutputDTO> => {
 
+
+        
         const events = await this.eventsDatabase.getAllEvents()
+        const empresas = await this.eventsDatabase.getEmpresas()
         const result = events.map((event)=>{
+            const empresa = empresas.find((empresa)=>empresa.id===event.empresa_id)
+            if(empresa===undefined){
+                throw new NotFoundError("empresa nao encontrada")
+            }
             return new Event(
                 event.id,
                 event.creator_id,
@@ -34,8 +41,14 @@ export class EventsBusiness {
                 event.image,
                 event.start_at,
                 event.created_at
-            ).toBusiness()
+            ).toBusiness(empresa.name)
         })
+
+
+        if(result===undefined){
+            throw new NotFoundError("Empresa nao encontrada")
+        }
+   
 
         const output = {
             message:"Resultado de todos os eventos",
