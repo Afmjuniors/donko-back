@@ -29,6 +29,7 @@ CREATE TABLE events (
     category TEXT NOT NULL,
     links_sales TEXT DEFAULT('') NOT NULL,
     image TEXT NOT NULL,
+    about TEXT NOT NULL,
     start_at TEXT NOT NULL,
     created_at TEXT NOT NULL,
 
@@ -62,7 +63,7 @@ VALUES
 
 INSERT INTO events
 VALUES
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5d","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",19.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Rock",'["http//teste.com"]',"https://picsum.photos/200","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5c","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5c",1,"Evento 2",29.90,'{"rua":"seila oq","numero":100,"bairro":"Barra da Tijuca","cep":20102102}',"Teatro","Comedia",'["http//teste.com"]',"https://picsum.photos/200","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5b","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5b",1,"Evento 3",9.90,'{"rua":"seila oq","numero":100,"bairro":"Porto","cep":20102102}',"Esposição","Moderna",'["http//teste.com"]',"https://picsum.photos/200","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
-("5dab31e0-bd9d-4dc3-bc00-e94bed677a5a","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 4",49.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":20102102}',"Musica","Pagode",'["http//teste.com"]',"https://picsum.photos/200","2023-03-26T10:52:35.627Z","2023-03-25T10:52:35.627Z");
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5d","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 1",19.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":"20102-102"}',"Musica","Rock",'["http//teste.com"]',"https://picsum.photos/200","Evento 1 criado para ser mokado e ter uma noção de como a tela de detalhes sera apresentada","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5c","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5c",1,"Evento 2",29.90,'{"rua":"seila oq","numero":100,"bairro":"Barra da Tijuca","cep":"20102-102"}',"Teatro","Comedia",'["http//teste.com"]',"https://picsum.photos/200","Evento 2 criado para ser mokado e ter uma noção de como a tela de detalhes sera apresentada","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5b","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5b",1,"Evento 3",9.90,'{"rua":"seila oq","numero":100,"bairro":"Porto","cep":"20102-102"}',"Esposição","Moderna",'["http//teste.com"]',"https://picsum.photos/200","Evento 3 criado para ser mokado e ter uma noção de como a tela de detalhes sera apresentada","2023-04-25T10:52:35.627Z","2023-03-25T10:52:35.627Z"),
+("5dab31e0-bd9d-4dc3-bc00-e94bed677a5a","7dab31e0-bd9d-4dc3-bc00-e94bed677a5b","6dab31e0-bd9d-4dc3-bc00-e94bed677a5d",1,"Evento 4",49.90,'{"rua":"seila oq","numero":100,"bairro":"Centro","cep":"20102-102"}',"Musica","Pagode",'["http//teste.com"]',"https://picsum.photos/200","Evento 4 criado para ser mokado e ter uma noção de como a tela de detalhes sera apresentada","2023-03-26T10:52:35.627Z","2023-03-25T10:52:35.627Z");

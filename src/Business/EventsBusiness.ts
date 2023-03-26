@@ -41,7 +41,7 @@ export class EventsBusiness {
                     event.image,
                     event.start_at,
                     event.created_at
-                ).toBusiness(empresa.name)
+                ).toBusiness(empresa.name,empresa.link)
             
         result = [newResult]
     
@@ -71,7 +71,7 @@ export class EventsBusiness {
                 event.image,
                 event.start_at,
                 event.created_at
-            ).toBusiness(empresa.name)
+            ).toBusiness(empresa.name,empresa.link)
         })
 
         result = newResult

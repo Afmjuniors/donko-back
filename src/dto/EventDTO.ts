@@ -63,8 +63,8 @@ export class EventDTO {
           throw new BadRequestError("'bairro' deve ser uma string");
         }
       
-        if (typeof cep !== "number") {
-          throw new BadRequestError("'cep' deve ser um número");
+        if (typeof cep !== "string") {
+          throw new BadRequestError("'cep' deve ser uma string");
         }
       
         return { rua, numero, bairro, cep };

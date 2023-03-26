@@ -42,7 +42,8 @@ export interface EventFront {
      creatorId:string,
      empresa:{
         id:string,
-        name:string
+        name:string,
+        link:string
      }
      isAvalible:boolean,
      name:string,
@@ -61,7 +62,7 @@ export interface Adress {
         rua:string,
         numero:number,
         bairro:string,
-        cep:number
+        cep:string
      
 }
 export interface EmpresasDB{

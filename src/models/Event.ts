@@ -87,7 +87,7 @@ export class Event {
         }  
     }
     
-    public toBusiness = (empresaName:string) : EventFront =>{
+    public toBusiness = (empresaName:string,link:string) : EventFront =>{
 
         return{
         id:this.id,
@@ -95,6 +95,7 @@ export class Event {
         empresa:{
             id:this.empresaId,
             name:empresaName,
+            link:link
         },
         isAvalible:this.isAvalible,
         name:this.name,
