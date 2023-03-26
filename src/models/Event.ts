@@ -18,6 +18,7 @@ export class Event {
         private category:string,
         private linksSales:string[],
         private image:string,
+        private about:string,
         private startAt:string,
         private createdAt:string,
     ){} 
@@ -58,6 +59,8 @@ export class Event {
         const index = this.linksSales.indexOf(linkSales)
         this.linksSales.splice(index,1)
     }
+    public getAbout():string{return this.about}
+    public setAbout(about:string):void{this.about=about}
 
     public getImage():string{return this.image}
     public setImage(image:string):void{this.image=image}
@@ -81,6 +84,7 @@ export class Event {
             type:this.type,
             category:this.category,
             links_sales:JSON.stringify(this.linksSales),
+            about:this.about,
             image:this.image,
             start_at  :this.startAt,
             created_at:this.createdAt,
@@ -110,6 +114,7 @@ export class Event {
         category:this.category,
         linksSales:this.linksSales,
         image:this.image,
+        about:this.about,
         startAt:this.startAt,
         createdAt:this.createdAt
     }

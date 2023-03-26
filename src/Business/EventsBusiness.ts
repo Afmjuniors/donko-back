@@ -39,6 +39,7 @@ export class EventsBusiness {
                     event.category,
                     JSON.parse(event.links_sales),
                     event.image,
+                    event.about,
                     event.start_at,
                     event.created_at
                 ).toBusiness(empresa.name,empresa.link)
@@ -69,6 +70,7 @@ export class EventsBusiness {
                 event.category,
                 JSON.parse(event.links_sales),
                 event.image,
+                event.about,
                 event.start_at,
                 event.created_at
             ).toBusiness(empresa.name,empresa.link)
@@ -107,6 +109,7 @@ export class EventsBusiness {
             input.category,
             input.linksSales,
             input.image,
+            input.about,
             input.startAt,
             nowDate
         )

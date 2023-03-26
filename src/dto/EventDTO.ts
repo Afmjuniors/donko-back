@@ -18,6 +18,7 @@ export interface CreateEventInputDTO {
     category: string,
     linksSales: string[],
     image: string,
+    about:string,
     startAt: string
 }
 export interface CreateEventOutputDTO {
@@ -80,6 +81,7 @@ export class EventDTO {
         category: unknown,
         linksSales: unknown,
         image: unknown,
+        about:unknown,
         startAt: unknown
     ): CreateEventInputDTO => {
 
@@ -108,6 +110,9 @@ export class EventDTO {
         if (typeof category !== "string") {
             throw new BadRequestError("'category' deve ser uma string")
         }
+        if (typeof about !== "string") {
+            throw new BadRequestError("'about' deve ser uma string")
+        }
         if (!Array.isArray(linksSales) || linksSales.some(s => typeof s !== 'string')) {
             throw new BadRequestError("'linkSales' deve ser uma Array de strings");
         }
@@ -129,6 +134,7 @@ export class EventDTO {
             category,
             linksSales,
             image,
+            about,
             startAt
         }
 

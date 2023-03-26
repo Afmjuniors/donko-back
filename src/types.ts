@@ -29,6 +29,7 @@ export interface EventDB{
     category:string,
     links_sales:string,
     image:string,
+    about:string,
     start_at:string,
     created_at:string,
 }
@@ -53,6 +54,7 @@ export interface EventFront {
      category:string,
      linksSales:string[],
      image:string,
+     about:string,
      startAt:string,
      createdAt:string,
 }

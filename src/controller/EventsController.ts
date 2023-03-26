@@ -38,6 +38,7 @@ export class EventsController {
                 req.body.type,
                 req.body.category,
                 req.body.linksSales,
+                req.body.about,
                 req.body.image,
                 req.body.startAt
             )
