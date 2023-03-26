@@ -11,8 +11,8 @@ export class EventsController {
 
     public getEvents = async (req: Request, res: Response) => {
         try {
-
-            const output = await this.eventsBusiness.getEvents()
+            const input = req.query.id as string
+            const output = await this.eventsBusiness.getEvents(input)
 
             res.status(200).send(output)
 

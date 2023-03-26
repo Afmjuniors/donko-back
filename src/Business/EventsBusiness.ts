@@ -16,13 +16,43 @@ export class EventsBusiness {
         private tokenManager: TokenManager
     ) { }
 
-    public getEvents = async () :Promise<GetAllEventOutputDTO> => {
+    public getEvents = async (input?:string) :Promise<GetAllEventOutputDTO> => {
+
+        let result
+        if(input){
+ 
+            const event = await this.eventsDatabase.getEventById(input)
+            const empresas = await this.eventsDatabase.getEmpresas()
+            const empresa = empresas.find((empresa)=>empresa.id===event.empresa_id)
+            if(empresa===undefined){
+                throw new NotFoundError("empresa nao encontrada")
+            }
+            const newResult =  new Event(
+                    event.id,
+                    event.creator_id,
+                    event.empresa_id,
+                    event.isAvalible?true:false,
+                    event.name,
+                    event.price,
+                    JSON.parse(event.adress),
+                    event.type,
+                    event.category,
+                    JSON.parse(event.links_sales),
+                    event.image,
+                    event.start_at,
+                    event.created_at
+                ).toBusiness(empresa.name)
+            
+        result = [newResult]
+    
+   
+        }else{
 
 
         
         const events = await this.eventsDatabase.getAllEvents()
         const empresas = await this.eventsDatabase.getEmpresas()
-        const result = events.map((event)=>{
+        const newResult = events.map((event)=>{
             const empresa = empresas.find((empresa)=>empresa.id===event.empresa_id)
             if(empresa===undefined){
                 throw new NotFoundError("empresa nao encontrada")
@@ -44,10 +74,8 @@ export class EventsBusiness {
             ).toBusiness(empresa.name)
         })
 
-
-        if(result===undefined){
-            throw new NotFoundError("Empresa nao encontrada")
-        }
+        result = newResult
+    }
    
 
         const output = {
