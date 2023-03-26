@@ -40,7 +40,10 @@ export interface EditEventDB{
 export interface EventFront {
      id:string,
      creatorId:string,
-     empresaId:string,
+     empresa:{
+        id:string,
+        name:string
+     }
      isAvalible:boolean,
      name:string,
      price:number,
@@ -60,4 +63,11 @@ export interface Adress {
         bairro:string,
         cep:number
      
+}
+export interface EmpresasDB{
+    id:string,
+    name:string
+    adress:string
+    link:string
+    image:string
 }
