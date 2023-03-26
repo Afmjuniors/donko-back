@@ -37,3 +37,27 @@ export interface EditEventDB{
     price?:number,
     start_at?:string
 }
+export interface EventFront {
+     id:string,
+     creatorId:string,
+     empresaId:string,
+     isAvalible:boolean,
+     name:string,
+     price:number,
+     adress:Adress,
+     type:string,
+     category:string,
+     linksSales:string[],
+     image:string,
+     startAt:string,
+     createdAt:string,
+}
+
+export interface Adress {
+    
+        rua:string,
+        numero:number,
+        bairro:string,
+        cep:number
+     
+}

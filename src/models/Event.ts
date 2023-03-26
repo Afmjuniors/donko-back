@@ -1,5 +1,6 @@
 import { nowDate } from "../constants/patterns";
-import { EventDB, Interests, Roles, UserDB } from "../types";
+import { GetAllEventOutputDTO } from "../dto/EventDTO";
+import { Adress, EventDB, EventFront, Interests, Roles, UserDB } from "../types";
 
 
 
@@ -12,7 +13,7 @@ export class Event {
         private isAvalible:boolean,
         private name:string,
         private price:number,
-        public adress:{},
+        public adress:Adress,
         private type:string,
         private category:string,
         private linksSales:string[],
@@ -85,6 +86,33 @@ export class Event {
             created_at:this.createdAt,
         }  
     }
+    
+    public toBusiness = () : EventFront =>{
+
+        return{
+        id:this.id,
+        creatorId:this.creatorId,
+        empresaId:this.empresaId,
+        isAvalible:this.isAvalible,
+        name:this.name,
+        price:this.price,
+        adress:{
+           rua:this.adress.rua,
+           numero:this.adress.numero,
+           bairro:this.adress.bairro,
+           cep:this.adress.cep
+        },
+        type:this.type,
+        category:this.category,
+        linksSales:this.linksSales,
+        image:this.image,
+        startAt:this.startAt,
+        createdAt:this.createdAt
+    }
+
+    }
+
+
     
 
     
